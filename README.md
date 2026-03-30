@@ -6,10 +6,10 @@
 
 ## Quick Start
 
-1. [Accessing Domains](accessing-domains.md) - URL structure and authentication
-2. [Domains Overview](domains-overview.md) - All available domains with IDs
-3. [Fetch NONCE Token](example-fetch-nonce.md) - Required before any write operation
-4. [OData Query Parameters](odata-query-parameters.md) - $filter, $select, $expand, $orderby, $top, $skip
+1. [Accessing Domains](docs/accessing-domains.md) - URL structure and authentication
+2. [Domains Overview](docs/domains-overview.md) - All available domains with IDs
+3. [Fetch NONCE Token](docs/example-fetch-nonce.md) - Required before any write operation
+4. [OData Query Parameters](docs/odata-query-parameters.md) - $filter, $select, $expand, $orderby, $top, $skip
 
 ---
 
@@ -17,38 +17,38 @@
 
 | File | Description |
 |------|-------------|
-| [Framework Overview](framework-overview.md) | Architecture, configuration-driven design, JavaScript hooks |
-| [OData as Service](odata-as-service.md) | Domains as OData services, URL patterns |
-| [Entity Data Model](entity-data-model.md) | EDM, $metadata endpoint, CSDL format |
-| [OData Primitives](odata-primitives.md) | Supported types: String, Int, Boolean, DateTimeOffset, etc. |
-| [Process HTTP Requests](process-http-requests.md) | Request pipeline, Nashorn JS hooks, Windchill Java API access |
-| [PTC Annotations](ptc-annotations.md) | PTC.ReadOnly, PTC.Operations, PTC.SecurityLabel, etc. |
-| [Inheriting Capabilities](inheriting-capabilities.md) | 20+ capabilities: versioned, workable, lifecycleManaged, contentHolder, etc. |
-| [API Catalog](api-catalog.md) | Swagger/API catalog in Windchill UI |
+| [Framework Overview](docs/framework-overview.md) | Architecture, configuration-driven design, JavaScript hooks |
+| [OData as Service](docs/odata-as-service.md) | Domains as OData services, URL patterns |
+| [Entity Data Model](docs/entity-data-model.md) | EDM, $metadata endpoint, CSDL format |
+| [OData Primitives](docs/odata-primitives.md) | Supported types: String, Int, Boolean, DateTimeOffset, etc. |
+| [Process HTTP Requests](docs/process-http-requests.md) | Request pipeline, Nashorn JS hooks, Windchill Java API access |
+| [PTC Annotations](docs/ptc-annotations.md) | PTC.ReadOnly, PTC.Operations, PTC.SecurityLabel, etc. |
+| [Inheriting Capabilities](docs/inheriting-capabilities.md) | 20+ capabilities: versioned, workable, lifecycleManaged, contentHolder, etc. |
+| [API Catalog](docs/api-catalog.md) | Swagger/API catalog in Windchill UI |
 
 ## OData Query & Filtering
 
 | File | Description |
 |------|-------------|
-| [OData Query Parameters](odata-query-parameters.md) | $filter, $select, $expand, $orderby, $top, $skip, $count |
-| [Filter on Navigation Properties](filter-navigation-properties.md) | Lambda expressions, Context/Organization/Folder/Attachments filtering |
-| [OrderBy Sorting Options](orderby-sorting-options.md) | Sorting on primitives, complex types, navigation properties |
-| [DateTime Offset](datetime-offset.md) | Date filtering syntax and examples |
-| [OData Prefer Headers](odata-prefer-headers.md) | odata.maxpagesize, return=representation/minimal |
-| [Latest Version Search](latest-version-search.md) | ptc.search.latestversion query option |
+| [OData Query Parameters](docs/odata-query-parameters.md) | $filter, $select, $expand, $orderby, $top, $skip, $count |
+| [Filter on Navigation Properties](docs/filter-navigation-properties.md) | Lambda expressions, Context/Organization/Folder/Attachments filtering |
+| [OrderBy Sorting Options](docs/orderby-sorting-options.md) | Sorting on primitives, complex types, navigation properties |
+| [DateTime Offset](docs/datetime-offset.md) | Date filtering syntax and examples |
+| [OData Prefer Headers](docs/odata-prefer-headers.md) | odata.maxpagesize, return=representation/minimal |
+| [Latest Version Search](docs/latest-version-search.md) | ptc.search.latestversion query option |
 
 ## Common Operations
 
 | File | Description |
 |------|-------------|
-| [CheckIn/CheckOut/Delete](actions-checkin-checkout-delete.md) | Single and bulk operations, atomic behavior |
-| [Common Navigation Properties](common-navigation-properties.md) | Creator, Modifier - available in all domains |
-| [Lifecycle States](lifecycle-states.md) | GetValidStateTransitions function |
-| [Set Lifecycle State](set-lifecycle-state.md) | SetState action |
-| [NONCE Token Function](nonce-token-function.md) | CSRF protection for write operations |
-| [Error Codes](error-codes.md) | HTTP status codes returned by Windchill REST Services |
-| [Batch Support](batch-support-theory.md) | Batch request protocol and theory |
-| [Batch Request Examples](batch-request-examples.md) | Simple + advanced batch with Content-ID cross-references |
+| [CheckIn/CheckOut/Delete](docs/actions-checkin-checkout-delete.md) | Single and bulk operations, atomic behavior |
+| [Common Navigation Properties](docs/common-navigation-properties.md) | Creator, Modifier - available in all domains |
+| [Lifecycle States](docs/lifecycle-states.md) | GetValidStateTransitions function |
+| [Set Lifecycle State](docs/set-lifecycle-state.md) | SetState action |
+| [NONCE Token Function](docs/nonce-token-function.md) | CSRF protection for write operations |
+| [Error Codes](docs/error-codes.md) | HTTP status codes returned by Windchill REST Services |
+| [Batch Support](docs/batch-support-theory.md) | Batch request protocol and theory |
+| [Batch Request Examples](docs/batch-request-examples.md) | Simple + advanced batch with Content-ID cross-references |
 
 ---
 
@@ -58,57 +58,57 @@
 
 | File | Domain ID | Description |
 |------|-----------|-------------|
-| [Product Management](product-management-domain.md) | `ProdMgmt` | Parts, BOM, PartUse, AXL entries |
-| [Product Management Actions](prodmgmt-actions-functions.md) | `ProdMgmt` | GetBOM, GetPartStructure, GetPartsList, UpdateCommonProperties |
-| [Document Management](document-management-domain.md) | `DocMgmt` | Documents, content upload/download |
-| [Document Management Actions](document-management-actions.md) | `DocMgmt` | UpdateCommonProperties for documents |
-| [Change Management](change-management-domain.md) | `ChangeMgmt` | ProblemReport, ChangeRequest, ChangeNotice, ChangeTask, Variance |
-| [Workflow](workflow-domain.md) | `Workflow` | WorkItems, Activities, completion, reassignment |
-| [Workflow Actions](workflow-domain-actions.md) | `Workflow` | CompleteWorkitem, SaveWorkitem, ReassignWorkItems |
-| [Workflow Functions](workflow-domain-functions.md) | `Workflow` | GetWorkItemReassignUserList |
+| [Product Management](docs/product-management-domain.md) | `ProdMgmt` | Parts, BOM, PartUse, AXL entries |
+| [Product Management Actions](docs/prodmgmt-actions-functions.md) | `ProdMgmt` | GetBOM, GetPartStructure, GetPartsList, UpdateCommonProperties |
+| [Document Management](docs/document-management-domain.md) | `DocMgmt` | Documents, content upload/download |
+| [Document Management Actions](docs/document-management-actions.md) | `DocMgmt` | UpdateCommonProperties for documents |
+| [Change Management](docs/change-management-domain.md) | `ChangeMgmt` | ProblemReport, ChangeRequest, ChangeNotice, ChangeTask, Variance |
+| [Workflow](docs/workflow-domain.md) | `Workflow` | WorkItems, Activities, completion, reassignment |
+| [Workflow Actions](docs/workflow-domain-actions.md) | `Workflow` | CompleteWorkitem, SaveWorkitem, ReassignWorkItems |
+| [Workflow Functions](docs/workflow-domain-functions.md) | `Workflow` | GetWorkItemReassignUserList |
 
 ### Data & Administration
 
 | File | Domain ID | Description |
 |------|-----------|-------------|
-| [Data Administration](data-administration-domain.md) | `DataAdmin` | Containers, Folders (CRUD), Products, Libraries, Projects |
-| [Principal Management](principal-management-domain.md) | `PrincipalMgmt` | Users, Groups, Organizations, License Groups |
-| [Common Domain](common-domain.md) | `PTC` | ContentItem, ApplicationData, URLData, WindchillEntity |
-| [Common Domain Functions](common-domain-functions.md) | `PTC` | GetEnumTypeConstraint, GetAllStates, GetWindchillMetaInfo |
+| [Data Administration](docs/data-administration-domain.md) | `DataAdmin` | Containers, Folders (CRUD), Products, Libraries, Projects |
+| [Principal Management](docs/principal-management-domain.md) | `PrincipalMgmt` | Users, Groups, Organizations, License Groups |
+| [Common Domain](docs/common-domain.md) | `PTC` | ContentItem, ApplicationData, URLData, WindchillEntity |
+| [Common Domain Functions](docs/common-domain-functions.md) | `PTC` | GetEnumTypeConstraint, GetAllStates, GetWindchillMetaInfo |
 
 ### Engineering
 
 | File | Domain ID | Description |
 |------|-----------|-------------|
-| [CAD Document Management](cad-document-management-domain.md) | `CADDocumentMgmt` | CADDocument, PartAssociation, CADStructure |
-| [Manufacturing Process Mgmt](manufacturing-process-management-domain.md) | `MfgProcMgmt` | ProcessPlans, Operations, Sequences, BOP |
-| [Classification Structure](classification-structure-domain.md) | `ClfStructure` | ClfNode, ClassifiedObject, classification search |
-| [Effectivity Management](effectivity-management-domain.md) | `EffectivityMgmt` | Date/Unit/Block/Serial effectivities |
-| [Product Platform Mgmt](product-platform-management-domain.md) | `ProdPlatformMgmt` | Options, Choices, OptionSets, VariantSpecifications |
-| [Visualization](visualization-domain.md) | `Visualization` | Representations, Creo View URLs, thumbnails |
+| [CAD Document Management](docs/cad-document-management-domain.md) | `CADDocumentMgmt` | CADDocument, PartAssociation, CADStructure |
+| [Manufacturing Process Mgmt](docs/manufacturing-process-management-domain.md) | `MfgProcMgmt` | ProcessPlans, Operations, Sequences, BOP |
+| [Classification Structure](docs/classification-structure-domain.md) | `ClfStructure` | ClfNode, ClassifiedObject, classification search |
+| [Effectivity Management](docs/effectivity-management-domain.md) | `EffectivityMgmt` | Date/Unit/Block/Serial effectivities |
+| [Product Platform Mgmt](docs/product-platform-management-domain.md) | `ProdPlatformMgmt` | Options, Choices, OptionSets, VariantSpecifications |
+| [Visualization](docs/visualization-domain.md) | `Visualization` | Representations, Creo View URLs, thumbnails |
 
 ### Supply Chain
 
 | File | Domain ID | Description |
 |------|-----------|-------------|
-| [Supplier Management](supplier-management-domain.md) | `SupplierMgmt` | SourcingContext, AML/AVL entries |
+| [Supplier Management](docs/supplier-management-domain.md) | `SupplierMgmt` | SourcingContext, AML/AVL entries |
 
 ### Quality (requires Quality product)
 
 | File | Domain ID | Description |
 |------|-----------|-------------|
-| [Quality Management System](quality-management-system-domain.md) | `QMS` | People, Places, Addresses, Subjects |
-| [Nonconformance](nonconformance-domain.md) | `NC` | Nonconformance processes |
-| [CAPA](capa-domain.md) | `CAPA` | Corrective & Preventive Actions |
-| [Customer Experience Mgmt](customer-experience-management-domain.md) | `CEM` | Customer complaints/feedback |
+| [Quality Management System](docs/quality-management-system-domain.md) | `QMS` | People, Places, Addresses, Subjects |
+| [Nonconformance](docs/nonconformance-domain.md) | `NC` | Nonconformance processes |
+| [CAPA](docs/capa-domain.md) | `CAPA` | Corrective & Preventive Actions |
+| [Customer Experience Mgmt](docs/customer-experience-management-domain.md) | `CEM` | Customer complaints/feedback |
 
 ### Other Domains
 
 | File | Domain ID | Description |
 |------|-----------|-------------|
-| [Saved Search](saved-search-domain.md) | `SavedSearch` | Execute saved searches via API |
-| [Event Management](event-management-domain.md) | `EventMgmt` | Webhook subscriptions |
-| [PDM (Conglomerate)](pdm-domain.md) | `PDM` | Read-only combined domain for PowerBI/Excel |
+| [Saved Search](docs/saved-search-domain.md) | `SavedSearch` | Execute saved searches via API |
+| [Event Management](docs/event-management-domain.md) | `EventMgmt` | Webhook subscriptions |
+| [PDM (Conglomerate)](docs/pdm-domain.md) | `PDM` | Read-only combined domain for PowerBI/Excel |
 
 ---
 
@@ -117,35 +117,35 @@
 ### Parts & BOM
 | File | Operation |
 |------|-----------|
-| [Create Part](example-create-part.md) | POST to ProdMgmt/Parts |
-| [Checkout Part](example-checkout-part.md) | PTC.ProdMgmt.CheckOut action |
-| [Checkin Part](example-checkin-part.md) | PTC.ProdMgmt.CheckIn action |
-| [Read BOM](example-read-bom.md) | GetBOM / GetPartStructure with $expand |
-| [Create Part Usage Link](example-create-part-usage-link.md) | BOM entry with occurrences |
-| [Revise Multiple Parts](example-revise-multiple-parts.md) | Bulk revision |
-| [Query with Filter](example-query-filter.md) | $filter examples |
+| [Create Part](docs/example-create-part.md) | POST to ProdMgmt/Parts |
+| [Checkout Part](docs/example-checkout-part.md) | PTC.ProdMgmt.CheckOut action |
+| [Checkin Part](docs/example-checkin-part.md) | PTC.ProdMgmt.CheckIn action |
+| [Read BOM](docs/example-read-bom.md) | GetBOM / GetPartStructure with $expand |
+| [Create Part Usage Link](docs/example-create-part-usage-link.md) | BOM entry with occurrences |
+| [Revise Multiple Parts](docs/example-revise-multiple-parts.md) | Bulk revision |
+| [Query with Filter](docs/example-query-filter.md) | $filter examples |
 
 ### Documents
 | File | Operation |
 |------|-----------|
-| [Create Document](example-create-document.md) | POST to DocMgmt/Documents |
-| [Upload Content](example-upload-content.md) | 3-stage file upload process |
+| [Create Document](docs/example-create-document.md) | POST to DocMgmt/Documents |
+| [Upload Content](docs/example-upload-content.md) | 3-stage file upload process |
 
 ### Workflow
 | File | Operation |
 |------|-----------|
-| [Complete Work Item](example-complete-workitem.md) | CompleteWorkitem with routing/voting |
-| [Reassign Work Items](example-reassign-workitems.md) | ReassignWorkItems action |
+| [Complete Work Item](docs/example-complete-workitem.md) | CompleteWorkitem with routing/voting |
+| [Reassign Work Items](docs/example-reassign-workitems.md) | ReassignWorkItems action |
 
 ### Authentication
 | File | Operation |
 |------|-----------|
-| [Fetch NONCE](example-fetch-nonce.md) | GetCSRFToken() function |
+| [Fetch NONCE](docs/example-fetch-nonce.md) | GetCSRFToken() function |
 
 ### Batch Operations
 | File | Operation |
 |------|-----------|
-| [Batch Requests](batch-request-examples.md) | Multipart batch with cross-references |
+| [Batch Requests](docs/batch-request-examples.md) | Multipart batch with cross-references |
 
 ---
 
@@ -153,15 +153,15 @@
 
 | File | Description |
 |------|-------------|
-| [Config Paths](config-paths.md) | Configuration file locations |
-| [Domain JSON File](domain-json-file.md) | Domain JSON structure |
-| [Create New Domain](create-new-domain.md) | Creating custom domains |
-| [Extending Domains](extending-domains.md) | Adding to existing PTC domains |
-| [Add Custom Properties](add-custom-properties.md) | Custom properties on entities |
-| [Add New Actions](add-new-actions.md) | Custom actions |
-| [Add New Functions](add-new-functions.md) | Custom functions |
-| [Example: Create Domain](example-create-domain.md) | Full domain creation example |
-| [Example: Soft Type](example-soft-type.md) | Extending ProdMgmt with soft type |
+| [Config Paths](docs/config-paths.md) | Configuration file locations |
+| [Domain JSON File](docs/domain-json-file.md) | Domain JSON structure |
+| [Create New Domain](docs/create-new-domain.md) | Creating custom domains |
+| [Extending Domains](docs/extending-domains.md) | Adding to existing PTC domains |
+| [Add Custom Properties](docs/add-custom-properties.md) | Custom properties on entities |
+| [Add New Actions](docs/add-new-actions.md) | Custom actions |
+| [Add New Functions](docs/add-new-functions.md) | Custom functions |
+| [Example: Create Domain](docs/example-create-domain.md) | Full domain creation example |
+| [Example: Soft Type](docs/example-soft-type.md) | Extending ProdMgmt with soft type |
 
 ---
 
@@ -169,12 +169,12 @@
 
 | File | Version |
 |------|---------|
-| [v1.6](changelog-v1.6.md) | Effectivity, PDM domain, ChangeTask, webhooks, pagination |
-| [v1.5](changelog-v1.5.md) | API Catalog, Workflow domain, Regulatory Master, security labels |
-| [v1.4](changelog-v1.4.md) | Multi-object CRUD, Options & Variants, CAD/Event/Supplier domains |
-| [v1.3](changelog-v1.3.md) | Batch refs, classification, Parts List/Visualization/Audit domains |
-| [v1.2](changelog-v1.2.md) | MPM, Change Mgmt, Classification, Saved Search domains |
-| [v1.1](changelog-v1.1.md) | Dynamic Doc, Quality, Info*Engine, Factory domains |
+| [v1.6](docs/changelog-v1.6.md) | Effectivity, PDM domain, ChangeTask, webhooks, pagination |
+| [v1.5](docs/changelog-v1.5.md) | API Catalog, Workflow domain, Regulatory Master, security labels |
+| [v1.4](docs/changelog-v1.4.md) | Multi-object CRUD, Options & Variants, CAD/Event/Supplier domains |
+| [v1.3](docs/changelog-v1.3.md) | Batch refs, classification, Parts List/Visualization/Audit domains |
+| [v1.2](docs/changelog-v1.2.md) | MPM, Change Mgmt, Classification, Saved Search domains |
+| [v1.1](docs/changelog-v1.1.md) | Dynamic Doc, Quality, Info*Engine, Factory domains |
 
 ---
 
