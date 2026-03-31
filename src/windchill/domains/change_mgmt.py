@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from windchill.domains.base import BaseDomain
+from windchill.odata.filter import F
 from windchill.odata.query import Query
 from windchill.types import ODataResponse
 
@@ -139,3 +140,26 @@ class ChangeMgmt(BaseDomain):
     ) -> ODataResponse:
         """Get resulting objects of a change object."""
         return await self.navigate(entity_set, entity_id, "ResultingObjects", query)
+
+    # ── Change Task Convenience Methods ──
+
+    async def get_change_task_by_number(
+        self, ct_number: str
+    ) -> dict[str, Any] | None:
+        """Look up a Change Task by its CT number (e.g., 'CT015630')."""
+        result = await self.list_change_tasks(
+            Query().filter(F.eq("Number", ct_number)).top(1)
+        )
+        return result.first
+
+    async def get_change_task_affected(
+        self, ct_id: str, query: Query | None = None
+    ) -> ODataResponse:
+        """Get objects affected by a Change Task."""
+        return await self.get_affected_objects("ChangeTasks", ct_id, query)
+
+    async def get_change_task_resulting(
+        self, ct_id: str, query: Query | None = None
+    ) -> ODataResponse:
+        """Get resulting objects (new/revised) from a Change Task."""
+        return await self.get_resulting_objects("ChangeTasks", ct_id, query)

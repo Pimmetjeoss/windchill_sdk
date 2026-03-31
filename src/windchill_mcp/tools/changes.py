@@ -125,3 +125,157 @@ async def windchill_create_problem_report(
         return json.dumps(result, indent=2, default=str)
     except Exception as e:
         return json.dumps({"error": str(e)})
+
+
+@mcp.tool()
+async def windchill_get_change_task(
+    ct_number: str,
+) -> str:
+    """Look up a Change Task by its CT number and return full details.
+
+    Change Tasks (CT) are the work items within a Change Notice that
+    track specific changes to parts and documents.
+
+    Args:
+        ct_number: The Change Task number (e.g., "CT015630").
+
+    Returns:
+        JSON object with Change Task details including name, state,
+        SAP text, creator, and Contiweb-specific fields.
+    """
+    try:
+        client = await get_client()
+        query = Query().filter(F.eq("Number", ct_number)).top(1)
+        result = await client.change_mgmt.list_change_tasks(query)
+
+        if not result.items:
+            return json.dumps({"error": f"Change Task {ct_number} not found"})
+
+        ct = result.first
+        return json.dumps(ct, indent=2, default=str)
+    except Exception as e:
+        return json.dumps({"error": str(e)})
+
+
+@mcp.tool()
+async def windchill_change_impact_analysis(
+    ct_number: str,
+) -> str:
+    """Perform a full change impact analysis for a Change Task.
+
+    Looks up the Change Task by CT number and retrieves:
+    - Change Task details (name, state, SAP text, creator)
+    - Affected Objects (parts/documents being changed)
+    - Resulting Objects (new/revised parts/documents created)
+    - Summary statistics by object type
+
+    This is useful for understanding the scope and impact of an
+    engineering change before validation or approval.
+
+    Args:
+        ct_number: The Change Task number (e.g., "CT015630").
+
+    Returns:
+        JSON object with change_task details, affected_objects,
+        resulting_objects, and a summary with counts per type.
+    """
+    try:
+        client = await get_client()
+        config = client.config
+
+        # Step 1: Find the Change Task
+        query = Query().filter(F.eq("Number", ct_number)).top(1)
+        result = await client.change_mgmt.list_change_tasks(query)
+
+        if not result.items:
+            return json.dumps({"error": f"Change Task {ct_number} not found"})
+
+        ct = result.first
+        ct_id = ct["ID"]
+
+        # Step 2: Get Affected Objects
+        affected_url = (
+            f"{config.odata_base}/ChangeMgmt/ChangeTasks('{ct_id}')/AffectedObjects"
+        )
+        affected_data = await client.http.get_json(affected_url)
+        affected = affected_data.get("value", [])
+
+        # Step 3: Get Resulting Objects
+        resulting_url = (
+            f"{config.odata_base}/ChangeMgmt/ChangeTasks('{ct_id}')/ResultingObjects"
+        )
+        resulting_data = await client.http.get_json(resulting_url)
+        resulting = resulting_data.get("value", [])
+
+        # Step 4: Build summary
+        affected_types: dict[str, int] = {}
+        for obj in affected:
+            obj_type = obj.get("ObjectType", "Unknown")
+            affected_types[obj_type] = affected_types.get(obj_type, 0) + 1
+
+        resulting_types: dict[str, int] = {}
+        for obj in resulting:
+            obj_type = obj.get("ObjectType", "Unknown")
+            resulting_types[obj_type] = resulting_types.get(obj_type, 0) + 1
+
+        # Step 5: Extract SAP replacement info if available
+        sap_text = ct.get("CWSAPsalestext", "")
+        replacements = []
+        if sap_text:
+            for line in sap_text.replace("\r\n", "\n").split("\n"):
+                line = line.strip()
+                if "REPLACED BY" in line:
+                    parts = line.split("REPLACED BY")
+                    if len(parts) == 2:
+                        replacements.append({
+                            "old_number": parts[0].strip(),
+                            "new_number": parts[1].strip(),
+                        })
+
+        report = {
+            "change_task": {
+                "number": ct.get("Number"),
+                "name": ct.get("Name"),
+                "state": ct.get("State"),
+                "created_by": ct.get("CreatedBy"),
+                "created_on": ct.get("CreatedOn"),
+                "sap_obsolete": ct.get("CWSAPObsolete"),
+                "wc_obsolete": ct.get("CWWCObsolete"),
+                "documentation_update": ct.get("CWDocumentationupdate"),
+                "service_validation": ct.get("CWSERVICEVALIDATION"),
+                "change_effect_new_order": ct.get("CWChangeEffectNewOrder"),
+                "change_effect_running_orders": ct.get("CWChangeEffectRunningOrders"),
+            },
+            "affected_objects": [
+                {
+                    "number": obj.get("Number", obj.get("Name", "?")),
+                    "name": obj.get("Name", ""),
+                    "type": obj.get("ObjectType", "?"),
+                    "state": obj.get("State"),
+                    "id": obj.get("ID"),
+                }
+                for obj in affected
+            ],
+            "resulting_objects": [
+                {
+                    "number": obj.get("Number", obj.get("Name", "?")),
+                    "name": obj.get("Name", ""),
+                    "type": obj.get("ObjectType", "?"),
+                    "state": obj.get("State"),
+                    "id": obj.get("ID"),
+                }
+                for obj in resulting
+            ],
+            "sap_replacements": replacements,
+            "summary": {
+                "total_affected": len(affected),
+                "total_resulting": len(resulting),
+                "total_sap_replacements": len(replacements),
+                "affected_by_type": affected_types,
+                "resulting_by_type": resulting_types,
+            },
+        }
+
+        return json.dumps(report, indent=2, default=str)
+    except Exception as e:
+        return json.dumps({"error": str(e)})
