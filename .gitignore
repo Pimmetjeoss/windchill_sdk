@@ -52,6 +52,10 @@ test_all_endpoints.py
 # MCP launcher (contains hardcoded paths)
 run_mcp.py
 
+# Generated documents and drafts
+email_draft.md
+*.docx
+
 # OS files
 Thumbs.db
 .DS_Store
