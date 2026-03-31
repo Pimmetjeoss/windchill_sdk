@@ -1,4 +1,110 @@
-# Windchill REST Services v1.6 - SDK Reference
+# Windchill SDK
+
+Python SDK + MCP Server voor PTC Windchill REST API. Maakt Windchill PLM toegankelijk voor Claude Desktop.
+
+## Installatie (Claude Desktop)
+
+1. Pak de zip uit naar een map, bijv. `C:\windchill_sdk`
+2. Open een terminal in die map
+3. Voer uit:
+
+```
+python scripts/install.py
+```
+
+4. Vul je Windchill credentials in (worden lokaal opgeslagen)
+5. **Herstart Claude Desktop**
+6. Vraag Claude: *"Welke containers zijn er in Windchill?"*
+
+## Wat kan je vragen aan Claude?
+
+- "Zoek part WH806239"
+- "Toon openstaande change requests"
+- "Welke workflow taken staan open?"
+- "Download het document van WH806239"
+- "Zoek documenten met FD-1460 in de naam"
+- "Welke containers zijn er?"
+
+## Verwijderen
+
+```
+python scripts/uninstall.py
+```
+
+## Veiligheid
+
+- Credentials worden **alleen lokaal** opgeslagen (`.env` + Claude Desktop config)
+- De MCP server draait **lokaal op je PC** als een Python process
+- Alle Windchill API calls gaan direct van jouw PC naar `plm.contiweb.com` via de VPN
+- Credentials verlaten je PC **nooit** - ze worden niet naar Anthropic gestuurd
+- Tool results (part data, change requests, etc.) worden wel naar Anthropic gestuurd zodat Claude een antwoord kan formuleren
+
+## Handmatige configuratie
+
+Als het install script niet werkt, kun je de MCP server handmatig configureren.
+
+### 1. SDK installeren
+
+Open een terminal in de map waar je de zip hebt uitgepakt:
+
+```
+pip install -e .[mcp]
+```
+
+### 2. Claude Desktop configureren
+
+Open het configuratiebestand:
+
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+- **Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+Voeg het volgende toe (of maak het bestand aan als het niet bestaat):
+
+```json
+{
+  "mcpServers": {
+    "windchill": {
+      "command": "python",
+      "args": ["C:\\pad\\naar\\windchill_sdk\\run_mcp.py"],
+      "env": {
+        "WINDCHILL_BASE_URL": "https://plm.contiweb.com/Windchill/servlet/odata",
+        "WINDCHILL_USERNAME": "jouw_gebruikersnaam",
+        "WINDCHILL_PASSWORD": "jouw_wachtwoord",
+        "WINDCHILL_VERIFY_SSL": "false",
+        "WINDCHILL_API_VERSION": "3"
+      }
+    }
+  }
+}
+```
+
+**Let op:**
+- Vervang `C:\\pad\\naar\\windchill_sdk` door het daadwerkelijke pad waar je de bestanden hebt uitgepakt
+- Gebruik dubbele backslashes (`\\`) in Windows paden
+- Vul je eigen Windchill gebruikersnaam en wachtwoord in
+- Als er al andere MCP servers in het bestand staan, voeg `windchill` toe binnen het bestaande `mcpServers` blok
+
+### 3. Launcher script aanmaken
+
+Maak het bestand `run_mcp.py` aan in de hoofdmap van de SDK:
+
+```python
+"""Launcher script for the Windchill MCP Server."""
+import sys
+sys.path.insert(0, r"C:\pad\naar\windchill_sdk\src")
+from windchill_mcp.server import main
+main()
+```
+
+Vervang het pad door je eigen installatiepad.
+
+### 4. Herstart Claude Desktop
+
+Sluit Claude Desktop volledig af en open het opnieuw. De Windchill tools zijn nu beschikbaar.
+
+---
+
+# API Reference
 
 > Complete API reference for PTC Windchill REST Services v1.6 (OData-based).
 > Base URL: `https://<server>/Windchill/servlet/odata/`
