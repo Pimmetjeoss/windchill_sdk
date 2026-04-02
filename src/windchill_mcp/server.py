@@ -30,6 +30,7 @@ import windchill_mcp.tools.documents  # noqa: E402, F401
 import windchill_mcp.tools.parts  # noqa: E402, F401
 import windchill_mcp.tools.quality  # noqa: E402, F401
 import windchill_mcp.tools.search  # noqa: E402, F401
+import windchill_mcp.tools.spm  # noqa: E402, F401
 import windchill_mcp.tools.workflow  # noqa: E402, F401
 
 # ── Register resource modules ──

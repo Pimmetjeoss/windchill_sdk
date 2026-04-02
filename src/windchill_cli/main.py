@@ -14,6 +14,7 @@ from windchill_cli.commands.changes import app as changes_app
 from windchill_cli.commands.documents import app as docs_app
 from windchill_cli.commands.parts import app as parts_app
 from windchill_cli.commands.search import app as search_app
+from windchill_cli.commands.spm import app as spm_app
 from windchill_cli.commands.workflow import app as workflow_app
 
 app = typer.Typer(
@@ -29,6 +30,7 @@ app.add_typer(changes_app, name="changes")
 app.add_typer(workflow_app, name="workflow")
 app.add_typer(search_app, name="search")
 app.add_typer(admin_app, name="admin")
+app.add_typer(spm_app, name="spm")
 
 console = Console()
 

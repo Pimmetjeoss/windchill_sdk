@@ -16,7 +16,8 @@ dependencies = [
 [project.optional-dependencies]
 mcp = ["mcp[cli]>=1.0"]
 cli = ["typer>=0.12", "rich>=13"]
-all = ["windchill-sdk[mcp,cli]"]
+spm = ["openpyxl>=3.1", "reportlab>=4.0"]
+all = ["windchill-sdk[mcp,cli,spm]"]
 dev = [
     "windchill-sdk[all]",
     "pytest>=8",
@@ -32,7 +33,7 @@ wc = "windchill_cli.main:app"
 windchill = "windchill_mcp.server:mcp"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/windchill", "src/windchill_mcp", "src/windchill_cli"]
+packages = ["src/windchill", "src/windchill_mcp", "src/windchill_cli", "src/windchill_spm"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
